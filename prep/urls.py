@@ -11,3 +11,4 @@ urlpatterns = [
     path("semistructured", views.semistructured, name='semistructured'),
     path("structured", views.structured, name='structured'),
 ]
+
