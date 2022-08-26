@@ -12,8 +12,10 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
-class FileModel(models.Model):
-   file = models.FileField(upload_to="file/")
+class myuploadfile(models.Model):
+    f_name = models.CharField(max_length=255)
+    myfiles = models.FileField(upload_to="")
 
-class ImageModel(models.Model):
-    file = models.ImageField(upload_to="img/")
+    def __str__(self):
+        return self.f_name
+    

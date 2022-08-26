@@ -17,8 +17,8 @@ from django.contrib.messages import constants as messages
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-MEDIA_URL = "/media/"
-MEDIA = BASE_DIR / "media"
+# MEDIA_URL = "/media/"
+# MEDIA = BASE_DIR / "media"
 
 
 
@@ -134,6 +134,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-MEDIA_URL = "/media/" 
-MEDIA_ROOT = BASE_DIR/"media"
+MEDIA_URL = '/media/' 
+MEDIA_ROOT = BASE_DIR/'media'
 

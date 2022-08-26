@@ -2,8 +2,13 @@ from django.shortcuts import render, HttpResponse, redirect
 from datetime import datetime
 from prep.models import Contact
 from django.contrib import messages
-from .models import FileModel, ImageModel
+#from .models import FileModel, ImageModel
 from django.http import JsonResponse
+from django.shortcuts import render
+from django.conf import settings
+from . models import myuploadfile
+#from django.core.files.storage import FileSystemStorage
+#from prep.models import Unstructured
 
 # Create your views here.
 def index(request):
@@ -36,6 +41,39 @@ def contact(request):
     # return HttpResponse("this is contact page")
 
 def unstructured(request):
+    context = {
+        "data":myuploadfile.objects.all(),
+    }
+    return render(request,"unstructured.html",context)
+
+def send_files(request):
+    if request.method == "POST" :
+        name = request.POST.get("filename")
+        myfile = request.FILES.getlist("uploadfiles")
+        
+        for f in myfile:
+            myuploadfile(f_name=name,myfiles=f).save()
+        
+        
+        return HttpResponse("Your File Has Been Successfully Uploaded!") 
+
+
+
+
+    # if request.method == "POST":
+    #     myfile = request.POST.get('myfile')
+    #     unstructured = Unstructured(myfile=myfile)
+    #     unstructured.save()
+    #     messages.success(request, 'Your file has been sent')
+    # if request.method == 'POST' and request.FILES['myfile']
+       # myfile = request.FILES['myfile']
+        # fs = FileSystemStorage()
+        # filename = fs.save(myfile.name, myfile)
+        # uploaded_file_url = fs.url(filename)
+        # return render(request, 'core/unstructured.html', {
+            # 'uploaded_file_url': uploaded_file_url
+        # })
+    # return render(request, 'core/simple_upload.html')
     return render(request, 'unstructured.html')
     # return HttpResponse("this is unstructured page")
 
@@ -48,21 +86,30 @@ def structured(request):
     # return HttpResponse("this is ustructured page")
 
 
-def single_upload(request):
-    file = request.FILES.get("file")
-    FileModel.objects.create(file=file)
-    return JsonResponse({"message": "success"})
+# def single_upload(request):
+#     file = request.FILES.get("file")
+#     FileModel.objects.create(file=file)
+#     return JsonResponse({"message": "success"})
 
-def multiple_upload(request):
-    file = request.FILES.getlist("files")
-    files_list = []
-    for file in files:
-        files_list.append(FileModel(file=file))
+# def multiple_upload(request):
+#     files = request.FILES.getlist("files")
+#     files_list = []
+#     for file in files:
+#         files_list.append(FileModel(file=file))
 
-    if files_list:
-        FileModel.objects.bulk_create(files_list)
+#     if files_list:
+#         FileModel.objects.bulk_create(files_list)
 
-    return JsonResponse({"message": "success"})    
+#     return JsonResponse({"message": "success"})    
 
 
-
+#def simple_upload(request):
+ #   if request.method == 'POST' and request.FILES['myfile']:
+  #      myfile = request.FILES['myfile']
+   #     fs = FileSystemStorage()
+    #    filename = fs.save(myfile.name, myfile)
+     #   uploaded_file_url = fs.url(filename)
+      #  return render(request, 'core/simple_upload.html', {
+       #     'uploaded_file_url': uploaded_file_url
+        #})
+    #return render(request, 'core/simple_upload.html')
