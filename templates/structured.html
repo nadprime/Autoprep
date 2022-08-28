@@ -19,7 +19,9 @@
         <div class="mb-3"> 
             <input id="files" name="files" type="file" class="file"  data-show-upload="false" data-show-caption="true" multiple>
         </div>
-    
+        {% if uploaded_file_url %}
+        <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+        {% endif %}
         <div class="mb-3">
             <button class="btn btn-primary" type="submit">Submit</button>
         </div>

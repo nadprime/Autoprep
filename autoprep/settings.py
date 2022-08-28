@@ -12,13 +12,14 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from django.contrib.messages import constants as messages
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-MEDIA_URL = "/media/"
-MEDIA = BASE_DIR / "media"
+# MEDIA_URL = "/media/"
+# MEDIA = BASE_DIR / "media"
 
 
 
@@ -26,10 +27,11 @@ MEDIA = BASE_DIR / "media"
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d$lt7iq@yp8b3cyeo9jeo&fp&bfoya8w)g+7p4=_i2v2th^(#a'
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', cast=bool)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = []
 
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -134,6 +137,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-MEDIA_URL = "/media/" 
-MEDIA_ROOT = BASE_DIR/"media"
+MEDIA_URL = '/media/' 
+MEDIA_ROOT = BASE_DIR/'media'
 

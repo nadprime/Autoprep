@@ -25,8 +25,10 @@ admin.site.index_title = "Welcome to Autoprep"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('prep.urls'))
+    path('', include('prep.urls',namespace='fileapp')),
+    
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

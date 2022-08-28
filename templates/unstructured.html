@@ -14,17 +14,14 @@
       </select>
     </div>
 
-<div class="container py-4">    
-    <form class="was-validated">
-        <div class="mb-3"> 
-            <input id="files" name="files" type="file" class="file"  data-show-upload="false" data-show-caption="true" multiple>
-        </div>
-    
-        <div class="mb-3">
-            <button class="btn btn-primary" type="submit">Submit</button>
-        </div>
+    <div class="container py-4">
+    <form action="{% url 'fileapp:uploads' %}" method="POST" enctype="multipart/form-data">
+        <input type="text" name="filename"  placeholder="enter your file name" >
+        <input type="file" multiple name="uploadfiles" >
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">File Upload</button>
     </form>
-</div>
+    </div>
 
 <div class="container py-4"> 
 <div class="input-group mb-4">
